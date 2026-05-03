@@ -4,49 +4,1343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Consumer Links</title>
+    <title>Consumer Links Ltd | Direct & Events Marketing</title>
 
+    <!-- Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* === HORIZONTAL OVERFLOW FIX === */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* === CORE STYLES === */
+        :root {
+            --brand-red: #d30000;
+            --brand-red-deep: #8b0000;
+            --brand-blue-dark: #001a33;
+            --brand-dark: #121212;
+            --brand-light: #ffffff;
+            --brand-gray-soft: #d6d6d6;
+            --brand-gray-mid: #eaeaea;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .text-brand {
+            color: var(--brand-red) !important;
+        }
+
+        /* === DYNAMIC NAVBAR === */
+        .navbar-custom {
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+            background-color: transparent;
+        }
+
+        .navbar-custom.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-custom .nav-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .navbar-custom.scrolled .nav-link {
+            color: #444 !important;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        .navbar-custom.scrolled .nav-link:hover {
+            color: var(--brand-red) !important;
+        }
+
+        .nav-btn-outline {
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-btn-outline:hover {
+            background: #ffffff;
+            color: var(--brand-red);
+        }
+
+        .navbar-custom.scrolled .nav-btn-outline {
+            border-color: var(--brand-red);
+            color: var(--brand-red);
+        }
+
+        .navbar-custom.scrolled .nav-btn-outline:hover {
+            background: var(--brand-red);
+            color: #ffffff;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .navbar-custom.scrolled .navbar-toggler-icon {
+            filter: invert(0);
+        }
+
+        /* === GLOBAL GRID ANIMATION === */
+        @keyframes gridPan {
+            0% {
+                transform: rotateX(75deg) translateY(0);
+            }
+
+            100% {
+                transform: rotateX(75deg) translateY(60px);
+            }
+        }
+
+        /* === SOLID DEEP RED HERO (With Static Architectural Grid) === */
+        .hero {
+            min-height: 100vh;
+            background-color: var(--brand-red-deep);
+            text-align: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        /* Static 3D Perspective Grid */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            bottom: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.06) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg) translateY(0);
+            animation: gridPan 6s linear infinite;
+            z-index: 0;
+        }
+
+        /* Soft vignette to fade grid into the deep red background */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 10%, var(--brand-red-deep) 85%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            max-width: 650px;
+            margin: 20px auto 30px auto;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .btn-hero {
+            background: #ffffff;
+            color: var(--brand-red-deep);
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            color: var(--brand-red);
+        }
+
+        /* === IMAGE CARDS === */
+        .hero-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            overflow: visible;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-images img {
+            width: 240px;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 20px;
+            transform: rotate(-8deg);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 6px solid #ffffff;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-images img:nth-child(2) {
+            transform: translateY(20px) rotate(-4deg);
+        }
+
+        .hero-images img:nth-child(3) {
+            transform: translateY(30px) rotate(0deg);
+            z-index: 2;
+        }
+
+        .hero-images img:nth-child(4) {
+            transform: translateY(20px) rotate(4deg);
+        }
+
+        .hero-images img:nth-child(5) {
+            transform: rotate(8deg);
+        }
+
+        .hero-images img:hover {
+            transform: scale(1.08) translateY(-20px) rotate(0deg) !important;
+            z-index: 10 !important;
+            border-color: var(--brand-gray-soft);
+            cursor: pointer;
+        }
+
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-images img {
+                width: 180px;
+                height: 260px;
+            }
+
+            .hero-images img:first-child,
+            .hero-images img:last-child {
+                display: none;
+            }
+        }
+
+        /* === SECTIONS GENERAL === */
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        .bg-white {
+            background-color: #ffffff;
+        }
+
+        .bg-soft {
+            background-color: var(--brand-gray-soft);
+        }
+
+        /* === STRENGTHS CHECKLIST === */
+        .strength-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .strength-list li {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .strength-list li::before {
+            content: '✓';
+            color: var(--brand-red);
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        /* === CLIENT TAGS === */
+        .client-tag {
+            display: inline-block;
+            padding: 0.65rem 1.5rem;
+            margin: 0.4rem;
+            background: #ffffff;
+            border: 1px solid var(--brand-gray-mid);
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            color: var(--brand-dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .client-tag:hover {
+            background: var(--brand-red);
+            border-color: var(--brand-red);
+            color: white !important;
+        }
+
+        /* === LIGHT 3D MOVING GRID BACKGROUND (SERVICES) === */
+        .has-3d-grid-light {
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+            background-color: var(--brand-gray-soft);
+            z-index: 1;
+        }
+
+        .has-3d-grid-light .moving-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            bottom: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(rgba(211, 0, 0, 0.1) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(211, 0, 0, 0.1) 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg) translateY(0);
+            animation: gridPan 3s linear infinite;
+            z-index: 0;
+        }
+
+        .has-3d-grid-light::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--brand-gray-soft) 80%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .has-3d-grid-light .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === DARK 3D MOVING GRID BACKGROUND (CTA) === */
+        .has-3d-grid-dark {
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+            background-color: var(--brand-dark);
+            z-index: 1;
+        }
+
+        .has-3d-grid-dark .moving-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            bottom: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(rgba(211, 0, 0, 0.25) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(211, 0, 0, 0.25) 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg) translateY(0);
+            animation: gridPan 3s linear infinite;
+            z-index: 0;
+        }
+
+        .has-3d-grid-dark::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--brand-dark) 85%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .has-3d-grid-dark .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === GLASS PRICING CARDS (LIGHT BACKGROUND) === */
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            height: 100%;
+            transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .glass-card-light:hover {
+            transform: translateY(-10px);
+            background: #ffffff;
+            border-color: rgba(211, 0, 0, 0.2);
+            box-shadow: 0 20px 40px rgba(211, 0, 0, 0.08);
+        }
+
+        .glass-card-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--brand-red);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-card-light:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card-light-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .glass-card-light-title {
+            font-size: 1.6rem;
+            color: var(--brand-dark);
+            line-height: 1.2;
+            margin-bottom: 0;
+        }
+
+        .glass-list-light {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .glass-list-light li {
+            color: #444;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .glass-list-light li::before {
+            content: '✓';
+            color: var(--brand-red);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* === HORIZONTAL PROCESS FLOW === */
+        .process-flow {
+            display: flex;
+            flex-wrap: nowrap;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 45px;
+            left: 5%;
+            width: 90%;
+            height: 3px;
+            background-color: var(--brand-gray-mid);
+            z-index: 1;
+        }
+
+        .process-node {
+            flex: 1 1 20%;
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .node-circle {
+            width: 90px;
+            height: 90px;
+            background: #ffffff;
+            border: 3px solid var(--brand-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .process-node:hover .node-circle {
+            background: var(--brand-red);
+            color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 15px 25px rgba(211, 0, 0, 0.2);
+        }
+
+        .node-content h4 {
+            color: var(--brand-dark);
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .node-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        @media (max-width: 991px) {
+            .process-flow {
+                flex-wrap: wrap;
+            }
+
+            .process-flow::before {
+                width: 3px;
+                height: 100%;
+                left: 45px;
+                top: 0;
+            }
+
+            .process-node {
+                flex: 1 1 100%;
+                margin-bottom: 2.5rem;
+                text-align: left;
+                display: flex;
+                align-items: flex-start;
+                padding: 0 15px;
+            }
+
+            .node-circle {
+                margin: 0 25px 0 0;
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+            }
+        }
+
+        /* === BENEFITS SECTION === */
+        .benefit-list li {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+            color: #555;
+        }
+
+        .benefit-list li::before {
+            content: '✓';
+            color: var(--brand-red);
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        /* === GALLERY / TESTIMONIALS === */
+        .gallery-grid {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem 1rem 1rem;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                column-count: 1;
+            }
+        }
+
+        /* === MEGA CTA === */
+        .btn-cta {
+            background: #ffffff;
+            color: var(--brand-dark);
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            color: var(--brand-red);
+        }
+
+        /* === DARK THEME FAT FOOTER === */
+        .footer-standard {
+            background-color: #111;
+            color: #fff;
+            padding: 80px 0 0 0;
+            border-top: 5px solid var(--brand-red);
+        }
+
+        .footer-col h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a,
+        .footer-col p {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--brand-red);
+        }
+
+        .footer-col ul li strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            background-color: #050505;
+            padding: 1.5rem 0;
+            margin-top: 60px;
+            border-top: 1px solid #222;
+        }
+
+        .footer-bottom .text-muted-custom {
+            color: #888;
+        }
+
+        .nav-btn-outline.footer-btn {
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #fff;
+        }
+
+        .nav-btn-outline.footer-btn:hover {
+            background: #fff;
+            color: var(--brand-dark);
+        }
+
+        /* === WHATSAPP WIDGET & PROMPT === */
+        .wa-wrapper {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wa-prompt {
+            background-color: #ffffff;
+            color: #333;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(20px);
+            animation: slideInWa 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 5s forwards;
+        }
+
+        .wa-prompt::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid #ffffff;
+        }
+
+        .wa-close {
+            cursor: pointer;
+            font-size: 1.4rem;
+            line-height: 1;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        .wa-close:hover {
+            color: var(--brand-red);
+        }
+
+        .wa-float {
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1);
+            color: #fff;
+        }
+
+        .wa-float svg {
+            width: 35px;
+            height: 35px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 768px) {
+            .wa-wrapper {
+                bottom: 15px;
+                right: 15px;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 10px;
+            }
+
+            .wa-prompt {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+
+            .wa-prompt::after {
+                right: 15px;
+                top: auto;
+                bottom: -8px;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-top: 8px solid #ffffff;
+                transform: none;
+            }
+
+            .wa-float {
+                width: 50px;
+                height: 50px;
+            }
+
+            .wa-float svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-smooth-scroll="true">
 
-    <div class="auth-wrapper">
-        <div class="auth-card">
-            <div class="text-center mb-4">
-                <h2 class="brand-text h3 mb-1">Consumer Links</h2>
-                <p class="text-muted small">Employee Portal Login</p>
-            </div>
-
-            <form action="dashboard.html" method="POST">
-                <div class="mb-3">
-                    <label for="email" class="form-label small fw-medium">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@consumerlinks.com" required>
-                </div>
-
-                <div class="mb-4">
-                    <label for="password" class="form-label small fw-medium">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="••••••••" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100 mb-3">Sign In</button>
-            </form>
-
-            <div class="text-center">
-                <span class="small text-muted">Don't have an account? <a href="register.html"
-                        class="text-decoration-none fw-medium">Register here</a></span>
+    <!-- Strictly Contained Navigation -->
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <!-- Logo with White Pill Background -->
+            <a class="navbar-brand bg-white rounded px-2 py-1" href="#">
+                <img src="logo.png" alt="Consumer Links Ltd Logo" height="45">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#expertise">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                        <a href="login.php" class="nav-btn-outline">Employee Portal</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+
+    <!-- Deep Red Hero with 3D Moving Perspective Grid -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="hero-title" data-aos="fade-up" style="white-space: nowrap;"><br>
+                Turning Reach Into <span>RESULTS.</span><br>
+            </h1>
+
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+                Consumer Links Ltd delivers targeted direct marketing, robust channel management,
+                and on-ground activations that connect brands with real people and real results.
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="#expertise" class="btn-hero">Explore Our Solutions</a>
+            </div>
+        </div>
+
+        <!-- IMAGE STACK -->
+        <div class="hero-images" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
+            <img src="use.png"
+                alt="Consultancy">
+            <img src="use.png"
+                alt="Event Support">
+            <img src="use.png"
+                alt="Direct Marketing">
+            <img src="use.png"
+                alt="Seminars">
+            <img src="use.png"
+                alt="Strategy">
+        </div>
+    </section>
+
+    <!-- Profile & Strengths & Clients Section -->
+    <section id="profile" class="section-padding bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Column: Who We Are -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <p class="text-brand text-uppercase fw-bold mb-2" style="letter-spacing: 2px; font-size: 0.85rem;">
+                        Who We Are</p>
+                    <h2 class="font-serif display-5 mb-4">Agency Profile</h2>
+                    <p class="fs-5 text-muted mb-4" style="line-height: 1.6; font-weight: 300;">
+                        Consumer Links Limited is a leading direct-marketing and consultancy communications company,
+                        delivering unique value added creative services to organizations across Nigeria.
+                    </p>
+                </div>
+
+                <!-- Right Column: Strengths Checklist -->
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-left">
+                    <div class="p-5 rounded-4 shadow-sm"
+                        style="background: var(--brand-gray-soft); border: 1px solid var(--brand-gray-mid);">
+                        <h4 class="font-serif mb-4">Our Strengths</h4>
+                        <ul class="strength-list text-muted">
+                            <li>Well trained/motivated manpower</li>
+                            <li>On-the-job experience</li>
+                            <li>Excellent track record</li>
+                            <li>Creativity and innovativeness</li>
+                            <li>Well developed data-base</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trusted By / Clients Block -->
+            <div id="clients" class="row mt-5 pt-5 border-top" data-aos="fade-up">
+                <div class="col-12 text-center mt-4">
+                    <p class="text-uppercase fw-bold mb-4" style="color: #999; letter-spacing: 2px; font-size: 0.9rem;">
+                        Trusted By Industry Leaders</p>
+                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
+                        <span class="client-tag">Nestle Nigeria PLC</span>
+                        <span class="client-tag">Nigerian Breweries PLC</span>
+                        <span class="client-tag">MTN Nigeria</span>
+                        <span class="client-tag">May and Baker Nig PLC</span>
+                        <span class="client-tag">GSK Nig PLC</span>
+                        <span class="client-tag">Fidson Healthcare PLC</span>
+                        <span class="client-tag">African Consumer Care Ltd</span>
+                        <span class="client-tag">Soft Sheen Carson W.A.</span>
+                        <span class="client-tag">Swiss Pharma Nigeria Ltd</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Section (With Light 3D Moving Grid) -->
+    <section id="expertise" class="section-padding has-3d-grid-light">
+        <div class="moving-grid"></div>
+
+        <div class="container">
+            <div class="text-center mb-5 pb-4" data-aos="fade-up">
+                <p class="text-uppercase fw-bold mb-2 text-brand" style="letter-spacing: 2px; font-size: 0.85rem;">What
+                    We Do</p>
+                <h2 class="display-4 fw-bold font-serif text-dark">Our Solutions</h2>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Card 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <span class="badge bg-danger rounded-pill mb-3 px-3 py-1 fw-medium">Core Service</span>
+                            <h3 class="font-serif glass-card-light-title">Events Support & Road Shows</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Developing creative media vehicles</li>
+                            <li>Planning & mgt of product launches</li>
+                            <li>Road shows & Market storming</li>
+                            <li>Dry and wet sampling activities</li>
+                            <li>In-bar promotions & Club mgt</li>
+                            <li>Party services & Outsourced functions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <h3 class="font-serif glass-card-light-title mt-4">Direct Mail & Response</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Direct mail concept and design</li>
+                            <li>Direct mail production</li>
+                            <li>Lead generation execution</li>
+                            <li>Data Base Management</li>
+                            <li>Prompt and accurate dispatches</li>
+                            <li>Consistent follow up of leads</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <h3 class="font-serif glass-card-light-title mt-4">Exhibitions & Seminars</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Conceptualising seminar agenda</li>
+                            <li>Creating & executing publicity plans</li>
+                            <li>Presentation formats & materials</li>
+                            <li>Management of complex logistics</li>
+                            <li>Selecting & setting up venues</li>
+                            <li>Hospitality for participants</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <h3 class="font-serif glass-card-light-title mt-4">Consumer & Market Research</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Conduct deep market research</li>
+                            <li>Develop custom research formats</li>
+                            <li>Data collection and collation</li>
+                            <li>Data-driven product advisory</li>
+                            <li>Actionable consumer insights</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <h3 class="font-serif glass-card-light-title mt-4">Marketing Consultancy</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Developing Marketing Strategies</li>
+                            <li>Implementation of Marketing Efforts</li>
+                            <li>Brand Performance Monitoring</li>
+                            <li>Regular Assessment of Brand Assets</li>
+                            <li>Corporate positioning strategy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <h3 class="font-serif glass-card-light-title mt-4">Acquisition & Outreach</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Telemarketing Services</li>
+                            <li>Targeted E-mail Marketing</li>
+                            <li>Customer Acquisition management</li>
+                            <li>Customer Retention management</li>
+                            <li>Long-term relationship building</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Flow Process Section -->
+    <section id="process" class="process-section-light bg-white" style="padding-top: 80px;">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <p class="text-uppercase fw-bold mb-2 text-brand" style="letter-spacing: 2px; font-size: 0.85rem;">The
+                    Framework</p>
+                <h2 class="font-serif display-4 fw-bold mb-4">Our Process</h2>
+                <p class="text-muted mx-auto" style="font-weight: 300; font-size: 1.1rem; max-width: 600px;">
+                    A highly structured approach to ensure your campaign is flawlessly executed from inception to final
+                    delivery.
+                </p>
+            </div>
+
+            <div class="process-flow">
+
+                <div class="process-node" data-aos="fade-up" data-aos-delay="0">
+                    <div class="node-circle">01</div>
+                    <div class="node-content">
+                        <h4 class="font-serif fw-bold">Discovery</h4>
+                        <p>Analyzing local market nuances, understanding the terrain, and defining clear goals.</p>
+                    </div>
+                </div>
+
+                <div class="process-node" data-aos="fade-up" data-aos-delay="100">
+                    <div class="node-circle">02</div>
+                    <div class="node-content">
+                        <h4 class="font-serif fw-bold">Measure</h4>
+                        <p>Establishing clear baselines and objectives to project accurate reach and impact.</p>
+                    </div>
+                </div>
+
+                <div class="process-node" data-aos="fade-up" data-aos-delay="200">
+                    <div class="node-circle">03</div>
+                    <div class="node-content">
+                        <h4 class="font-serif fw-bold">Agency Brief</h4>
+                        <p>Translating discovery data into actionable intelligence and campaign structure.</p>
+                    </div>
+                </div>
+
+                <div class="process-node" data-aos="fade-up" data-aos-delay="300">
+                    <div class="node-circle">04</div>
+                    <div class="node-content">
+                        <h4 class="font-serif fw-bold">Proposal</h4>
+                        <p>Delivering pocket-friendly propositions and finalizing the tactical framework.</p>
+                    </div>
+                </div>
+
+                <div class="process-node" data-aos="fade-up" data-aos-delay="400">
+                    <div class="node-circle">05</div>
+                    <div class="node-content">
+                        <h4 class="font-serif fw-bold">Execute</h4>
+                        <p>Deploying our well-trained manpower and logistics fleet to guarantee satisfaction.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section-padding bg-soft border-bottom border-top" style="border-color: #eaeaea !important;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <p class="text-uppercase fw-bold mb-2 text-brand" style="letter-spacing: 2px; font-size: 0.85rem;">
+                        The Promise</p>
+                    <h2 class="font-serif display-5 fw-bold mb-4">Key Benefits of Our Offer</h2>
+                    <p class="text-muted mb-4 fs-5" style="font-weight: 300;">We ensure that the proper and intended
+                        message is delivered effectively.</p>
+                    <ul class="list-unstyled benefit-list">
+                        <li>Develop & maintain sustainable/profitable relationships with target customers.</li>
+                        <li>Provide vast and wide networking opportunities across our territories.</li>
+                        <li>Deliver highly transparent, pocket-friendly propositions.</li>
+                        <li>Execute original, robust, and culturally acceptable campaigns.</li>
+                        <li>Develop solid and sustainable structures on ground.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-left">
+                    <img src="use.png"
+                        alt="Team Meeting" class="img-fluid rounded-4 shadow-sm border" style="border-color: #eaeaea;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activations / Gallery -->
+    <section id="gallery" class="section-padding bg-white">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="font-serif display-5 fw-bold">Activations & Gallery</h2>
+                <p class="text-muted fs-5">A visual track record of our on-ground success.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="fade-up">
+                    <img src="use.png"
+                        alt="Market Activation">
+                    <div class="gallery-caption">Mimee Noodles Market Activation</div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="use.png"
+                        alt="Road Show">
+                    <div class="gallery-caption">Nationwide Road Shows</div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="use.png"
+                        alt="Conferences">
+                    <div class="gallery-caption">Seminar & Conference Logistics</div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="use.png"
+                        alt="Market Storming">
+                    <div class="gallery-caption">Market Storming & Wet Sampling</div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="use.png"
+                        alt="In bar promotion">
+                    <div class="gallery-caption">In-Bar Promotions & Party Services</div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="use.png" alt="In bar promotion">
+                    <div class="gallery-caption">In-Bar Promotions & Party Services</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEGA CTA WITH DARK 3D MOVING GRID -->
+    <section class="section-padding has-3d-grid-dark text-center" style="padding: 150px 0;">
+        <div class="moving-grid"></div>
+
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-serif display-4 fw-bold text-white mb-4">Let's Grow Your Brand</h2>
+            <p class="fs-5 text-white opacity-75 mb-5 mx-auto" style="max-width: 600px; font-weight: 300;">
+                Partner with us to build sustainable structures, execute flawless campaigns, and drive real measurable
+                results.
+            </p>
+            <a href="mailto:info@consumerlinksltd.com" class="btn-cta fs-5">Contact Us Today</a>
+        </div>
+    </section>
+
+    <!-- Dark Theme Footer -->
+    <footer class="footer-standard">
+        <div class="container">
+            <div class="row g-5 footer-col">
+                <div class="col-lg-4 pe-lg-4">
+                    <!-- Inserted Logo Placeholder with White Background -->
+                    <a class="navbar-brand mb-4 d-inline-block bg-white rounded px-2 py-1" href="#">
+                        <img src="logo.png" alt="Consumer Links Ltd Logo" height="45">
+                    </a>
+                    <p>
+                        Building sustainable structures and delivering original, robust marketing solutions since 2012.
+                    </p>
+                </div>
+
+                <div class="col-lg-3">
+                    <h5>Top Accounts</h5>
+                    <ul>
+                        <li><a href="#">MTN Nigeria</a></li>
+                        <li><a href="#">Nestle Nigeria PLC</a></li>
+                        <li><a href="#">Nigerian Breweries PLC</a></li>
+                        <li><a href="#">GSK Nig PLC</a></li>
+                        <li><a href="#">Fidson Healthcare PLC</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2">
+                    <h5>Solutions</h5>
+                    <ul>
+                        <li><a href="#expertise">Events & Roadshows</a></li>
+                        <li><a href="#expertise">Direct Mail</a></li>
+                        <li><a href="#expertise">Market Research</a></li>
+                        <li><a href="#expertise">Marketing Consultancy</a></li>
+                        <li><a href="#expertise">Acquisition & Outreach</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3">
+                    <h5>Contact Us</h5>
+                    <ul>
+                        <li class="mb-3">
+                            <strong>Head Office:</strong><br>
+                            5A Godwin Omonua Street,<br>
+                            Ire-Akari Estate, Isolo,<br>
+                            Lagos, Nigeria.
+                        </li>
+                        <li class="mb-1"><strong>Phone:</strong> 08033093658</li>
+                        <li class="mb-3"><strong>Tel:</strong> 01-7734791</li>
+                        <li><a href="mailto:info@consumerlinksltd.com"
+                                style="color: var(--brand-red);">info@consumerlinksltd.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0 text-muted-custom"
+                        style="font-size: 0.85rem; font-weight: 400;">
+                        &copy; 2026 Consumer Links Ltd. P.O. Box 14286 Ikeja. All Rights Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="login.php" class="nav-btn-outline footer-btn text-decoration-none">Access Employee
+                            Portal &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Widget & Delayed Prompt -->
+    <div class="wa-wrapper">
+        <div class="wa-prompt" id="wa-prompt">
+            Have any questions? Let's chat!
+            <span class="wa-close" onclick="document.getElementById('wa-prompt').style.display='none'">&times;</span>
+        </div>
+        <a href="https://wa.me/2348033093658" class="wa-float" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.128.552 4.195 1.602 6.012L.15 23.473l5.56-1.458c1.761.96 3.75 1.468 5.82 1.468 6.645 0 12.031-5.385 12.031-12.031S18.676 0 12.031 0zm-1.025 18.257c-1.635-.002-3.235-.44-4.64-1.272l-.333-.198-3.456.906.924-3.37-.217-.346c-.914-1.457-1.396-3.155-1.396-4.898 0-5.076 4.13-9.206 9.208-9.206 5.076 0 9.206 4.13 9.206 9.206s-4.13 9.206-9.206 9.206zm4.845-6.62c-.266-.134-1.573-.778-1.817-.868-.244-.09-.422-.134-.6.134-.178.267-.685.868-.84 1.045-.156.178-.312.2-.578.067-.267-.134-1.122-.413-2.138-1.31-.79-.7-1.323-1.564-1.478-1.832-.156-.267-.017-.411.117-.544.12-.12.267-.312.4-.467.134-.156.178-.267.267-.445.09-.178.045-.334-.022-.467-.067-.134-.6-1.446-.822-1.98-.216-.52-.435-.45-.6-.456-.156-.006-.334-.006-.512-.006-.178 0-.467.067-.712.334-.244.267-.933.912-.933 2.224 0 1.312.956 2.58 1.089 2.758.134.178 1.88 2.87 4.555 4.024 2.675 1.154 2.675.778 3.164.733.49-.045 1.573-.642 1.795-1.264.223-.623.223-1.156.156-1.265-.067-.11-.245-.177-.512-.31z" />
+            </svg>
+        </a>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // 1. Initialize Animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: false,
+            offset: 50
+        });
+
+        // 2. Navbar Scroll Logic
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 
 </html>
