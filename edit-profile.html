@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | Consumer Links</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand brand-text h4 mb-0" href="profile.html">Consumer Links</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item me-3">
+                        <span class="text-muted small">Logged in as <strong class="text-dark">Employee</strong></span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="btn btn-outline-danger btn-sm px-3 rounded-pill fw-medium">Log
+                            Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+
+        <div class="row mb-4 align-items-center">
+            <div class="col-md-8">
+                <a href="profile.html" class="text-decoration-none text-muted mb-2 d-inline-block small">&larr; Back to
+                    Dashboard</a>
+                <h3 class="fw-bold">Edit Profile</h3>
+                <p class="text-muted">Update your personal information and account settings.</p>
+            </div>
+        </div>
+
+        <form action="profile.html" method="POST" enctype="multipart/form-data">
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="dash-card text-center p-4 h-100">
+                        <h5 class="fw-bold mb-4">Profile Picture</h5>
+
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=0D6EFD&color=fff&size=120"
+                            alt="Current Profile Picture" class="avatar-lg mb-3" id="photoPreview">
+
+                        <div class="mb-3 text-start">
+                            <label for="profilePhoto" class="form-label small fw-medium text-muted">Upload New
+                                Photo</label>
+                            <input class="form-control form-control-sm" type="file" id="profilePhoto"
+                                accept="image/jpeg, image/png">
+                            <div class="form-text small">Max size: 2MB. JPG or PNG only.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="dash-card h-100">
+                        <div class="card-header-custom">
+                            Personal Details
+                        </div>
+
+                        <div class="card-body p-4">
+                            <div class="row g-3 mb-4 p-3 bg-light rounded-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-medium text-muted">Employee ID</label>
+                                    <input type="text" class="form-control bg-light text-muted" value="CL-84920"
+                                        readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-medium text-muted">Department</label>
+                                    <input type="text" class="form-control bg-light text-muted" value="Sales & Outreach"
+                                        readonly>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label small fw-medium">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" value="John" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label small fw-medium">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" value="Doe" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label small fw-medium">Work Email</label>
+                                    <input type="email" class="form-control" id="email"
+                                        value="john.doe@consumerlinks.com" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label small fw-medium">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" value="+1 (555) 123-4567"
+                                        required>
+                                </div>
+                            </div>
+
+                            <hr class="my-4 text-muted">
+
+                            <h5 class="fw-bold mb-3">Update Password</h5>
+                            <p class="text-muted small mb-3">Leave these fields blank if you do not wish to change your
+                                password.</p>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="newPassword" class="form-label small fw-medium">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword"
+                                        placeholder="Enter new password">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="confirmNewPassword" class="form-label small fw-medium">Confirm New
+                                        Password</label>
+                                    <input type="password" class="form-control" id="confirmNewPassword"
+                                        placeholder="Confirm new password">
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-end">
+                                <a href="profile.html" class="btn btn-light me-2 fw-medium">Cancel</a>
+                                <button type="submit" class="btn btn-primary fw-medium px-4">Save Changes</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
