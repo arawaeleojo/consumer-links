@@ -4,66 +4,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | Consumer Links</title>
+    <title>Employee Enrollment | Consumer Links Ltd</title>
 
+    <!-- Clean, Corporate Sans-Serif Typography Only -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-red: #d30000;
+            --brand-red-deep: #8b0000;
+            --brand-dark: #120a0a;
+            --brand-light: #ffffff;
+            --brand-sand: #FFFDD0;
+            --brand-sand-dark: #e6e4b8;
+        }
+
+        body {
+            font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+            background-color: var(--brand-sand);
+            color: var(--brand-dark);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Fixed Brand Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(211, 0, 0, 0.04) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(211, 0, 0, 0.04) 2px, transparent 2px);
+            background-size: 60px 60px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .text-dim {
+            color: var(--brand-dark);
+            opacity: 0.7;
+        }
+
+        /* === TOPBAR === */
+        .reg-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--brand-sand-dark);
+            margin-bottom: 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* === FORM CARD === */
+        .enrollment-card {
+            background: var(--brand-light);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--brand-sand-dark);
+            padding: 3.5rem;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .document-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brand-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header {
+            font-weight: 700;
+            color: var(--brand-red-deep);
+            border-bottom: 2px solid var(--brand-sand);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            margin-top: 3.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .section-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .form-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--brand-sand-dark);
+            background-color: #fafafa;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            color: var(--brand-dark);
+            font-weight: 500;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--brand-red);
+            box-shadow: 0 0 0 3px rgba(211, 0, 0, 0.1);
+            background-color: var(--brand-light);
+            outline: none;
+        }
+
+        .photo-preview-box {
+            width: 100%;
+            height: 180px;
+            border: 2px dashed var(--brand-sand-dark);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            color: var(--brand-dark);
+            opacity: 0.7;
+            font-size: 0.85rem;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .photo-preview-box:hover {
+            border-color: var(--brand-red);
+            background-color: var(--brand-sand);
+            opacity: 1;
+            color: var(--brand-red);
+        }
+
+        .btn-submit {
+            background: var(--brand-red);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 6px;
+            font-weight: 700;
+            border: none;
+            transition: 0.3s;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background: var(--brand-red-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(211, 0, 0, 0.2);
+        }
+
+        .sub-group-box {
+            background: var(--brand-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--brand-sand-dark);
+            margin-bottom: 1rem;
+        }
+
+        .sub-group-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--brand-red);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="auth-wrapper">
-        <div class="auth-card" style="max-width: 550px;">
-            <div class="text-center mb-4">
-                <h2 class="brand-text h3 mb-1">Consumer Links</h2>
-                <p class="text-muted small">Create your employee profile</p>
+    <header class="reg-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <img src="logo.png" alt="Consumer Links Logo" height="40">
+            <a href="login.html" class="text-decoration-none fw-bold"
+                style="color: var(--brand-red); font-size: 0.9rem; text-transform: uppercase;">Exit Form</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="enrollment-card">
+            <div class="text-center mb-5">
+                <h1 class="document-title">Employee Bio-Data Form</h1>
+                <p class="text-dim">Official HR Record & Payroll Documentation</p>
             </div>
 
-            <form action="index.html" method="POST">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="firstName" class="form-label small fw-medium">First Name</label>
-                        <input type="text" class="form-control" id="firstName" required>
+            <form action="staff-profile.html" method="POST" enctype="multipart/form-data">
+
+                <!-- SECTION 1: PERSONAL IDENTITY & SYSTEM ROLE -->
+                <h4 class="section-header"><i class="fa-solid fa-user-id-card"></i> 1. Personal Identity & Role</h4>
+                <div class="row g-4 mb-4">
+                    <!-- Photo Upload -->
+                    <div class="col-md-3">
+                        <label class="form-label">Passport Photograph</label>
+                        <div class="photo-preview-box" onclick="document.getElementById('passport').click()">
+                            <i class="fa-solid fa-camera mb-2" style="font-size: 1.5rem;"></i>
+                            Upload Official Photo
+                        </div>
+                        <input type="file" id="passport" hidden accept="image/*" required>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="lastName" class="form-label small fw-medium">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" required>
+
+                    <!-- Core Details -->
+                    <div class="col-md-9">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Title</label>
+                                <select class="form-select" required>
+                                    <option value="" selected disabled>Select...</option>
+                                    <option>Mr.</option>
+                                    <option>Mrs.</option>
+                                    <option>Miss</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Role in Company</label>
+                                <select class="form-select" required
+                                    style="border-color: var(--brand-red); background-color: var(--brand-sand);">
+                                    <option value="" selected disabled>Select assigned role...</option>
+                                    <option value="merchandiser">Merchandiser</option>
+                                    <option value="retailer">Retailer</option>
+                                    <option value="field-sales">Field Sales Agent</option>
+                                    <option value="admin">Administrative / Office</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label small fw-medium">Work Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@consumerlinks.com" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="phone" class="form-label small fw-medium">Phone Number</label>
-                    <input type="tel" class="form-control" id="phone" placeholder="+1 234 567 8900" required>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <label for="password" class="form-label small fw-medium">Password</label>
-                        <input type="password" class="form-control" id="password" required>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select" required>
+                            <option value="">Select...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <label for="confirmPassword" class="form-label small fw-medium">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" required>
+                    <div class="col-md-3">
+                        <label class="form-label">Marital Status</label>
+                        <select class="form-select" required>
+                            <option value="">Select...</option>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Divorced</option>
+                            <option>Widowed</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">State of Origin</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">L.G.A</label>
+                        <input type="text" class="form-control" required>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 mb-3">Complete Registration</button>
+                <!-- SECTION 2: CONTACT INFORMATION -->
+                <h4 class="section-header"><i class="fa-solid fa-address-book"></i> 2. Contact Details</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" placeholder="+234" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control" placeholder="personal@email.com" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Residential Address</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Mailing Address</label>
+                        <input type="text" class="form-control"
+                            placeholder="Leave blank if same as Residential Address">
+                    </div>
+                </div>
+
+                <!-- SECTION 3: FAMILY & MEDICAL EMERGENCY -->
+                <h4 class="section-header"><i class="fa-solid fa-heart-pulse"></i> 3. Family & Medical History</h4>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="sub-group-box h-100 mb-0">
+                            <h5 class="sub-group-title">Next of Kin</h5>
+                            <div class="mb-3"><label class="form-label">Name of Next of Kin</label><input type="text"
+                                    class="form-control" required></div>
+                            <div class="mb-3"><label class="form-label">Relationship</label><input type="text"
+                                    class="form-control" required></div>
+                            <div class="mb-0"><label class="form-label">Address & Telephone of NOK</label><textarea
+                                    class="form-control" rows="2" required></textarea></div>
+
+                            <h5 class="sub-group-title border-top pt-3 mt-4"
+                                style="border-color: var(--brand-sand-dark) !important;">Spouse Details</h5>
+                            <div class="mb-3"><label class="form-label">Spouse Telephone Number</label><input type="tel"
+                                    class="form-control"></div>
+                            <div class="mb-0"><label class="form-label">Spouse Address</label><textarea
+                                    class="form-control" rows="2"></textarea></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="sub-group-box h-100 mb-0">
+                            <h5 class="sub-group-title">Medical Record</h5>
+                            <div class="row g-3 mb-4">
+                                <div class="col-6"><label class="form-label">Blood Group</label><input type="text"
+                                        class="form-control" placeholder="e.g., O+"></div>
+                                <div class="col-6"><label class="form-label">Genotype</label><input type="text"
+                                        class="form-control" placeholder="e.g., AA"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Have you suffered from any major illness?</label>
+                                <select class="form-select" required>
+                                    <option value="" selected disabled>Select...</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                            <div class="mb-0">
+                                <label class="form-label">If yes, please specify details</label>
+                                <textarea class="form-control" rows="3"
+                                    placeholder="Type of illness, condition, or ongoing medication..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: EDUCATIONAL BACKGROUND -->
+                <h4 class="section-header"><i class="fa-solid fa-graduation-cap"></i> 4. Educational Background</h4>
+
+                <div class="sub-group-box">
+                    <h5 class="sub-group-title">Institution 1 (Most Recent)</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4"><label class="form-label">Institution Attended</label><input type="text"
+                                class="form-control" required></div>
+                        <div class="col-md-3"><label class="form-label">Qualification Obtained</label><input type="text"
+                                class="form-control" required></div>
+                        <div class="col-md-3"><label class="form-label">Date Completed</label><input type="month"
+                                class="form-control" required></div>
+                        <div class="col-md-2"><label class="form-label">Grade</label><input type="text"
+                                class="form-control" required></div>
+                    </div>
+                </div>
+
+                <div class="sub-group-box">
+                    <h5 class="sub-group-title">Institution 2</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4"><label class="form-label">Institution Attended</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Qualification Obtained</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Date Completed</label><input type="month"
+                                class="form-control"></div>
+                        <div class="col-md-2"><label class="form-label">Grade</label><input type="text"
+                                class="form-control"></div>
+                    </div>
+                </div>
+
+                <div class="sub-group-box">
+                    <h5 class="sub-group-title">Institution 3</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4"><label class="form-label">Institution Attended</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Qualification Obtained</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Date Completed</label><input type="month"
+                                class="form-control"></div>
+                        <div class="col-md-2"><label class="form-label">Grade</label><input type="text"
+                                class="form-control"></div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: EMPLOYMENT HISTORY -->
+                <h4 class="section-header"><i class="fa-solid fa-briefcase"></i> 5. Employment History</h4>
+                <p class="text-dim mb-3" style="font-size: 0.85rem;">Please list your most recent employment first.</p>
+
+                <div class="sub-group-box">
+                    <h5 class="sub-group-title">Previous Employer 1</h5>
+                    <div class="row g-3">
+                        <div class="col-md-5"><label class="form-label">Company Name</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-4"><label class="form-label">Post Held</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Duration (e.g., 2 Yrs)</label><input type="text"
+                                class="form-control"></div>
+
+                        <div class="col-md-3"><label class="form-label">Date From</label><input type="month"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Date To</label><input type="month"
+                                class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Reason for Leaving</label><input type="text"
+                                class="form-control"></div>
+                    </div>
+                </div>
+
+                <div class="sub-group-box">
+                    <h5 class="sub-group-title">Previous Employer 2</h5>
+                    <div class="row g-3">
+                        <div class="col-md-5"><label class="form-label">Company Name</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-4"><label class="form-label">Post Held</label><input type="text"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Duration</label><input type="text"
+                                class="form-control"></div>
+
+                        <div class="col-md-3"><label class="form-label">Date From</label><input type="month"
+                                class="form-control"></div>
+                        <div class="col-md-3"><label class="form-label">Date To</label><input type="month"
+                                class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Reason for Leaving</label><input type="text"
+                                class="form-control"></div>
+                    </div>
+                </div>
+
+                <!-- SECTION 6: LANGUAGES -->
+                <h4 class="section-header"><i class="fa-solid fa-language"></i> 6. Languages & Fluency</h4>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="sub-group-box h-100 mb-0">
+                            <label class="form-label">Language 1</label>
+                            <input type="text" class="form-control mb-2" placeholder="Language (e.g., English)"
+                                required>
+                            <select class="form-select" required>
+                                <option value="" selected disabled>Select Fluency...</option>
+                                <option>Native / Bilingual</option>
+                                <option>Professional</option>
+                                <option>Basic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sub-group-box h-100 mb-0">
+                            <label class="form-label">Language 2</label>
+                            <input type="text" class="form-control mb-2" placeholder="Language">
+                            <select class="form-select">
+                                <option value="" selected disabled>Select Fluency...</option>
+                                <option>Native / Bilingual</option>
+                                <option>Professional</option>
+                                <option>Basic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sub-group-box h-100 mb-0">
+                            <label class="form-label">Language 3</label>
+                            <input type="text" class="form-control mb-2" placeholder="Language">
+                            <select class="form-select">
+                                <option value="" selected disabled>Select Fluency...</option>
+                                <option>Native / Bilingual</option>
+                                <option>Professional</option>
+                                <option>Basic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 7: STATUTORY & FINANCIAL -->
+                <h4 class="section-header"><i class="fa-solid fa-building-columns"></i> 7. Statutory & Payroll Details
+                </h4>
+                <div class="row g-3">
+                    <div class="col-md-4"><label class="form-label">National ID (NIN)</label><input type="text"
+                            class="form-control" required></div>
+                    <div class="col-md-4"><label class="form-label">Bank Verification Number (BVN)</label><input
+                            type="text" class="form-control" required></div>
+                    <div class="col-md-4"><label class="form-label">Tax ID Number (TIN)</label><input type="text"
+                            class="form-control"></div>
+
+                    <div class="col-md-6"><label class="form-label">Bank Name</label><input type="text"
+                            class="form-control" required></div>
+                    <div class="col-md-6"><label class="form-label">Account Number</label><input type="text"
+                            class="form-control" required></div>
+
+                    <!-- Adjusted layout after removing RSA PIN -->
+                    <div class="col-md-6"><label class="form-label">PFA Name</label><input type="text"
+                            class="form-control"></div>
+                    <div class="col-md-6"><label class="form-label">NHF Number</label><input type="text"
+                            class="form-control"></div>
+                </div>
+
+                <!-- SECTION 8: REFERENCES -->
+                <h4 class="section-header"><i class="fa-solid fa-user-check"></i> 8. Professional References</h4>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="sub-group-box h-100 mb-0">
+                            <h5 class="sub-group-title">Reference 1</h5>
+                            <div class="mb-2"><label class="form-label">Name</label><input type="text"
+                                    class="form-control" required></div>
+                            <div class="mb-2"><label class="form-label">Address</label><input type="text"
+                                    class="form-control" required></div>
+                            <div class="mb-2"><label class="form-label">Telephone</label><input type="tel"
+                                    class="form-control" required></div>
+                            <div class="mb-0"><label class="form-label">Email Address</label><input type="email"
+                                    class="form-control" required></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sub-group-box h-100 mb-0">
+                            <h5 class="sub-group-title">Reference 2</h5>
+                            <div class="mb-2"><label class="form-label">Name</label><input type="text"
+                                    class="form-control" required></div>
+                            <div class="mb-2"><label class="form-label">Address</label><input type="text"
+                                    class="form-control" required></div>
+                            <div class="mb-2"><label class="form-label">Telephone</label><input type="tel"
+                                    class="form-control" required></div>
+                            <div class="mb-0"><label class="form-label">Email Address</label><input type="email"
+                                    class="form-control" required></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sub-group-box h-100 mb-0">
+                            <h5 class="sub-group-title">Reference 3</h5>
+                            <div class="mb-2"><label class="form-label">Name</label><input type="text"
+                                    class="form-control"></div>
+                            <div class="mb-2"><label class="form-label">Address</label><input type="text"
+                                    class="form-control"></div>
+                            <div class="mb-2"><label class="form-label">Telephone</label><input type="tel"
+                                    class="form-control"></div>
+                            <div class="mb-0"><label class="form-label">Email Address</label><input type="email"
+                                    class="form-control"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5 mb-2">
+                    <div class="form-check d-inline-block text-start mb-4 p-4 rounded"
+                        style="background: #fafafa; border: 1px solid var(--brand-sand-dark); max-width: 600px;">
+                        <input class="form-check-input" type="checkbox" id="consent" required
+                            style="border-color: var(--brand-red);">
+                        <label class="form-check-label text-dim" for="consent"
+                            style="font-size: 0.9rem; font-weight: 500;">
+                            I hereby certify that all the information provided in this document is true, complete, and
+                            accurate. I understand that any falsification or omission of facts may be cause for
+                            immediate dismissal.
+                        </label>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn-submit">Submit Documentation</button>
+                </div>
+
             </form>
-
-            <div class="text-center">
-                <span class="small text-muted">Already registered? <a href="index.html"
-                        class="text-decoration-none fw-medium">Sign in here</a></span>
-            </div>
         </div>
     </div>
 

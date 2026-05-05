@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Email | Consumer Links Admin</title>
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === CORE STYLES === */
+        :root {
+            --brand-red: #d30000;
+            --brand-red-deep: #8b0000;
+            --brand-dark: #120a0a;
+            --brand-light: #ffffff;
+            --brand-sand: #FFFDD0;
+            --brand-sand-dark: #e6e4b8;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--brand-sand);
+            color: var(--brand-dark);
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .text-brand {
+            color: var(--brand-red) !important;
+        }
+
+        /* Replaces generic grays with opacity-based dark tone */
+        .text-dim {
+            color: var(--brand-dark);
+            opacity: 0.65;
+        }
+
+        .text-dimmer {
+            color: var(--brand-dark);
+            opacity: 0.45;
+        }
+
+        /* === SIDEBAR NAVIGATION === */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background-color: var(--brand-light);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--brand-sand-dark);
+            text-align: center;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item-admin {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--brand-dark);
+            opacity: 0.8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item-admin:hover {
+            background-color: var(--brand-sand);
+            color: var(--brand-red);
+            opacity: 1;
+        }
+
+        .nav-item-admin.active {
+            background-color: var(--brand-sand);
+            color: var(--brand-red-deep);
+            border-left-color: var(--brand-red);
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .nav-item-admin i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--brand-sand-dark);
+        }
+
+        /* === MAIN CONTENT AREA === */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Header / Topbar */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background-color: var(--brand-light);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--brand-light);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--brand-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* === UI CARDS === */
+        .ui-card {
+            background-color: var(--brand-light);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--brand-light);
+            height: 100%;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--brand-sand-dark);
+            color: var(--brand-dark);
+        }
+
+        /* === EMAIL COMPOSER === */
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            color: var(--brand-dark);
+            opacity: 0.9;
+        }
+
+        .form-control,
+        .form-select {
+            width: 100%;
+            border: 1px solid var(--brand-sand-dark);
+            background-color: #fafafa;
+            border-radius: 6px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            color: var(--brand-dark);
+            font-weight: 500;
+            font-family: inherit;
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--brand-red);
+            box-shadow: 0 0 0 2px rgba(211, 0, 0, 0.1);
+            background-color: var(--brand-light);
+        }
+
+        /* Rich Text Editor Mockup */
+        .editor-container {
+            border: 1px solid var(--brand-sand-dark);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .editor-container:focus-within {
+            border-color: var(--brand-red);
+            box-shadow: 0 0 0 2px rgba(211, 0, 0, 0.1);
+        }
+
+        .editor-toolbar {
+            background-color: var(--brand-sand);
+            border-bottom: 1px solid var(--brand-sand-dark);
+            padding: 10px 15px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .toolbar-btn {
+            background: none;
+            border: none;
+            color: var(--brand-dark);
+            opacity: 0.7;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 4px;
+        }
+
+        .toolbar-btn:hover {
+            opacity: 1;
+            color: var(--brand-red);
+        }
+
+        .editor-textarea {
+            width: 100%;
+            border: none;
+            min-height: 250px;
+            padding: 15px;
+            resize: vertical;
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .editor-textarea:focus {
+            outline: none;
+        }
+
+        /* File Upload Zone */
+        .upload-zone {
+            border: 2px dashed var(--brand-sand-dark);
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .upload-zone:hover {
+            border-color: var(--brand-red);
+            background-color: var(--brand-sand);
+        }
+
+        .upload-zone i {
+            font-size: 2rem;
+            color: var(--brand-red);
+            margin-bottom: 10px;
+        }
+
+        .upload-zone p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--brand-dark);
+            opacity: 0.8;
+        }
+
+        /* Buttons */
+        .btn-action {
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+            border: 1px solid var(--brand-sand-dark);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .btn-action:hover {
+            border-color: var(--brand-red);
+            color: var(--brand-red);
+            background-color: var(--brand-sand);
+        }
+
+        .btn-primary-action {
+            background-color: var(--brand-red);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .btn-primary-action:hover {
+            background-color: var(--brand-red-deep);
+            color: white;
+        }
+
+        /* === RECENT CAMPAIGNS LIST === */
+        .campaign-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .campaign-item {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--brand-sand-dark);
+        }
+
+        .campaign-item:last-child {
+            border-bottom: none;
+        }
+
+        .campaign-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--brand-dark);
+        }
+
+        .campaign-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .target-badge {
+            background-color: var(--brand-sand);
+            border: 1px solid var(--brand-sand-dark);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--brand-red-deep);
+        }
+
+        /* Mobile Sidebar Adjustments */
+        @media (max-width: 991px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .action-row {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+
+            .action-row .btn-primary-action,
+            .action-row .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <a href="index.html">
+                <img src="../logo.png" alt="Consumer Links" height="40">
+            </a>
+        </div>
+        <div class="sidebar-nav">
+            <a href="admin-dashboard.html" class="nav-item-admin">
+                <i class="fa-solid fa-table-columns"></i> Dashboard
+            </a>
+            <a href="talent-directory.html" class="nav-item-admin">
+                <i class="fa-solid fa-users"></i> Talent Directory
+            </a>
+            <!-- Active State Moved to Bulk Email -->
+            <a href="bulk-email.html" class="nav-item-admin active">
+                <i class="fa-solid fa-envelope-open-text"></i> Bulk Email
+            </a>
+            <a href="admin-settings.html" class="nav-item-admin">
+                <i class="fa-solid fa-gear"></i> Settings
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="login.html" class="nav-item-admin text-brand" style="padding: 0; opacity: 1;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Secure Logout
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div>
+                <h4 class="font-serif fw-bold mb-0">Bulk Email</h4>
+                <p class="text-dim mb-0" style="font-size: 0.85rem; font-weight: 500;">Dispatch mass communications to
+                    specific talent categories.</p>
+            </div>
+            <div class="user-profile">
+                <div class="text-end d-none d-sm-block">
+                    <p class="mb-0 fw-bold" style="font-size: 0.9rem;">HR Admin</p>
+                    <p class="mb-0 text-dim" style="font-size: 0.8rem;">admin@consumerlinksltd.com</p>
+                </div>
+                <div class="avatar">HR</div>
+            </div>
+        </header>
+
+        <div class="row g-4">
+
+            <!-- LEFT COLUMN: Email Composer -->
+            <div class="col-lg-8">
+                <div class="ui-card">
+                    <h2 class="card-title">Compose Campaign</h2>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label class="form-label">Target Audience</label>
+                            <select class="form-select">
+                                <option value="" disabled selected>Select recipient category...</option>
+                                <option value="all">All Approved Talent (1,180)</option>
+                                <option value="merchandiser">Merchandisers (412)</option>
+                                <option value="retailer">Retailers (305)</option>
+                                <option value="field-sales">Field Sales Agents (280)</option>
+                                <option value="admin">Administrative Staff (183)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Campaign Subject</label>
+                            <input type="text" class="form-control" placeholder="Enter email subject line...">
+                        </div>
+                    </div>
+
+                    <label class="form-label">Message Body</label>
+                    <div class="editor-container">
+                        <!-- Toolbar -->
+                        <div class="editor-toolbar">
+                            <button class="toolbar-btn" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                            <button class="toolbar-btn" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                            <button class="toolbar-btn" title="Underline"><i class="fa-solid fa-underline"></i></button>
+                            <div style="width: 1px; height: 15px; background: var(--brand-sand-dark); margin: 0 5px;">
+                            </div>
+                            <button class="toolbar-btn" title="Bullet List"><i class="fa-solid fa-list-ul"></i></button>
+                            <button class="toolbar-btn" title="Numbered List"><i
+                                    class="fa-solid fa-list-ol"></i></button>
+                            <div style="width: 1px; height: 15px; background: var(--brand-sand-dark); margin: 0 5px;">
+                            </div>
+                            <button class="toolbar-btn" title="Insert Link"><i class="fa-solid fa-link"></i></button>
+                        </div>
+                        <!-- Text Area -->
+                        <textarea class="editor-textarea"
+                            placeholder="Dear Team,&#10;&#10;Write your message here..."></textarea>
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="upload-zone">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Drag and drop a file, or click to browse</p>
+                        <span class="text-dimmer" style="font-size: 0.75rem;">Supported files: PDF, DOCX, JPG, PNG (Max
+                            5MB)</span>
+                    </div>
+
+                    <!-- Action Footer -->
+                    <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top action-row"
+                        style="border-color: var(--brand-sand-dark) !important;">
+                        <button class="btn-action"><i class="fa-regular fa-floppy-disk"></i> Save as Draft</button>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn-action"><i class="fa-regular fa-eye"></i> Preview</button>
+                            <button class="btn-primary-action"><i class="fa-solid fa-paper-plane"></i> Send
+                                Email</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: History & Templates -->
+            <div class="col-lg-4">
+                <div class="ui-card">
+                    <h2 class="card-title">Recent Campaigns</h2>
+
+                    <ul class="campaign-list">
+                        <li class="campaign-item">
+                            <div class="campaign-title">Q4 Deployment Briefing</div>
+                            <div class="campaign-meta mt-2">
+                                <span class="target-badge">Field Sales</span>
+                                <span class="text-dim"><i class="fa-regular fa-clock me-1"></i> Oct 14, 2025</span>
+                            </div>
+                        </li>
+
+                        <li class="campaign-item">
+                            <div class="campaign-title">Updated Merchandising Guidelines</div>
+                            <div class="campaign-meta mt-2">
+                                <span class="target-badge">Merchandisers</span>
+                                <span class="text-dim"><i class="fa-regular fa-clock me-1"></i> Oct 10, 2025</span>
+                            </div>
+                        </li>
+
+                        <li class="campaign-item">
+                            <div class="campaign-title">Office Public Holiday Notice</div>
+                            <div class="campaign-meta mt-2">
+                                <span class="target-badge">Administrative</span>
+                                <span class="text-dim"><i class="fa-regular fa-clock me-1"></i> Sep 28, 2025</span>
+                            </div>
+                        </li>
+
+                        <li class="campaign-item">
+                            <div class="campaign-title">Annual Policy Refresher</div>
+                            <div class="campaign-meta mt-2">
+                                <span class="target-badge">All Talent</span>
+                                <span class="text-dim"><i class="fa-regular fa-clock me-1"></i> Sep 15, 2025</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button class="btn-action w-100 mt-4 justify-content-center">View All History</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

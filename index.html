@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consumer Links Ltd | Direct & Events Marketing</title>
+    <title>Consumer Links Ltd | Marketing & HR Outsourcing</title>
 
     <!-- Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,11 +31,10 @@
         :root {
             --brand-red: #d30000;
             --brand-red-deep: #8b0000;
-            --brand-blue-dark: #001a33;
-            --brand-dark: #121212;
+            --brand-dark: #120a0a;
             --brand-light: #ffffff;
-            --brand-gray-soft: #d6d6d6;
-            --brand-gray-mid: #eaeaea;
+            --brand-sand: #FFFDD0;
+            --brand-sand-dark: #e6e4b8;
         }
 
         body {
@@ -82,10 +81,39 @@
             color: #ffffff !important;
             margin: 0 1rem;
             transition: color 0.3s;
+            position: relative;
+            /* Added for the underline animation */
         }
 
+        /* Animated Nav Underline */
+        .navbar-custom .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--brand-red);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .navbar-custom .nav-link:hover::after,
+        .navbar-custom .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Scrolled & Active Text Colors */
         .navbar-custom.scrolled .nav-link {
-            color: #444 !important;
+            color: var(--brand-dark) !important;
+        }
+
+        .navbar-custom .nav-link.active {
+            color: var(--brand-red) !important;
+        }
+
+        .navbar-custom.scrolled .nav-link.active {
+            color: var(--brand-red) !important;
         }
 
         .navbar-custom .nav-link:hover {
@@ -96,6 +124,7 @@
             color: var(--brand-red) !important;
         }
 
+        /* Employee Portal Button */
         .nav-btn-outline {
             border: 2px solid #ffffff;
             color: #ffffff;
@@ -209,6 +238,7 @@
             line-height: 1.6;
         }
 
+        /* Dual Hero Buttons */
         .btn-hero {
             background: #ffffff;
             color: var(--brand-red-deep);
@@ -226,6 +256,23 @@
             transform: translateY(-2px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
             color: var(--brand-red);
+        }
+
+        .btn-hero-outline {
+            background: transparent;
+            color: #ffffff;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: 2px solid #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-hero-outline:hover {
+            background: #ffffff;
+            color: var(--brand-red-deep);
         }
 
         /* === IMAGE CARDS === */
@@ -272,7 +319,7 @@
         .hero-images img:hover {
             transform: scale(1.08) translateY(-20px) rotate(0deg) !important;
             z-index: 10 !important;
-            border-color: var(--brand-gray-soft);
+            border-color: var(--brand-sand);
             cursor: pointer;
         }
 
@@ -301,8 +348,8 @@
             background-color: #ffffff;
         }
 
-        .bg-soft {
-            background-color: var(--brand-gray-soft);
+        .bg-sand {
+            background-color: var(--brand-sand);
         }
 
         /* === STRENGTHS CHECKLIST === */
@@ -317,6 +364,8 @@
             font-size: 1.05rem;
             display: flex;
             align-items: flex-start;
+            color: var(--brand-dark);
+            font-weight: 400;
         }
 
         .strength-list li::before {
@@ -332,7 +381,7 @@
             padding: 0.65rem 1.5rem;
             margin: 0.4rem;
             background: #ffffff;
-            border: 1px solid var(--brand-gray-mid);
+            border: 1px solid var(--brand-sand-dark);
             border-radius: 50px;
             font-weight: 500;
             font-size: 0.9rem;
@@ -352,7 +401,7 @@
             position: relative;
             overflow: hidden;
             perspective: 1000px;
-            background-color: var(--brand-gray-soft);
+            background-color: var(--brand-sand);
             z-index: 1;
         }
 
@@ -363,8 +412,8 @@
             bottom: -50%;
             left: -50%;
             background-image:
-                linear-gradient(rgba(211, 0, 0, 0.1) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(211, 0, 0, 0.1) 2px, transparent 2px);
+                linear-gradient(rgba(211, 0, 0, 0.08) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(211, 0, 0, 0.08) 2px, transparent 2px);
             background-size: 60px 60px;
             transform: rotateX(75deg) translateY(0);
             animation: gridPan 3s linear infinite;
@@ -378,7 +427,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, var(--brand-gray-soft) 80%);
+            background: radial-gradient(circle at center, transparent 0%, var(--brand-sand) 80%);
             z-index: 1;
             pointer-events: none;
         }
@@ -388,43 +437,43 @@
             z-index: 2;
         }
 
-        /* === DARK 3D MOVING GRID BACKGROUND (CTA) === */
-        .has-3d-grid-dark {
+        /* === RED 3D MOVING GRID BACKGROUND (CTA) === */
+        .has-3d-grid-red {
             position: relative;
             overflow: hidden;
             perspective: 1000px;
-            background-color: var(--brand-dark);
+            background-color: var(--brand-red-deep);
             z-index: 1;
         }
 
-        .has-3d-grid-dark .moving-grid {
+        .has-3d-grid-red .moving-grid {
             position: absolute;
             width: 200%;
             height: 200%;
             bottom: -50%;
             left: -50%;
             background-image:
-                linear-gradient(rgba(211, 0, 0, 0.25) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(211, 0, 0, 0.25) 2px, transparent 2px);
+                linear-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.15) 2px, transparent 2px);
             background-size: 60px 60px;
             transform: rotateX(75deg) translateY(0);
             animation: gridPan 3s linear infinite;
             z-index: 0;
         }
 
-        .has-3d-grid-dark::after {
+        .has-3d-grid-red::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, var(--brand-dark) 85%);
+            background: radial-gradient(circle at center, transparent 0%, var(--brand-red-deep) 85%);
             z-index: 1;
             pointer-events: none;
         }
 
-        .has-3d-grid-dark .container {
+        .has-3d-grid-red .container {
             position: relative;
             z-index: 2;
         }
@@ -522,7 +571,7 @@
             left: 5%;
             width: 90%;
             height: 3px;
-            background-color: var(--brand-gray-mid);
+            background-color: var(--brand-sand-dark);
             z-index: 1;
         }
 
@@ -566,7 +615,7 @@
         }
 
         .node-content p {
-            color: #666;
+            color: #444;
             font-size: 0.95rem;
             line-height: 1.6;
             font-weight: 400;
@@ -608,7 +657,8 @@
             font-size: 1.05rem;
             display: flex;
             align-items: flex-start;
-            color: #555;
+            color: var(--brand-dark);
+            font-weight: 400;
         }
 
         .benefit-list li::before {
@@ -630,7 +680,7 @@
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--brand-sand-dark);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
@@ -649,7 +699,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            background: linear-gradient(transparent, rgba(18, 10, 10, 0.9));
             padding: 2rem 1rem 1rem;
             color: white;
             font-size: 0.9rem;
@@ -671,7 +721,7 @@
         /* === MEGA CTA === */
         .btn-cta {
             background: #ffffff;
-            color: var(--brand-dark);
+            color: var(--brand-red-deep);
             padding: 14px 32px;
             border-radius: 30px;
             font-weight: 600;
@@ -687,9 +737,9 @@
             color: var(--brand-red);
         }
 
-        /* === DARK THEME FAT FOOTER === */
+        /* === WARM DARK THEME FAT FOOTER === */
         .footer-standard {
-            background-color: #111;
+            background-color: #110a0a;
             color: #fff;
             padding: 80px 0 0 0;
             border-top: 5px solid var(--brand-red);
@@ -715,7 +765,7 @@
 
         .footer-col ul li a,
         .footer-col p {
-            color: #888;
+            color: #dcdcdc;
             text-decoration: none;
             transition: color 0.3s;
             font-size: 0.9rem;
@@ -731,14 +781,14 @@
         }
 
         .footer-bottom {
-            background-color: #050505;
+            background-color: #0a0505;
             padding: 1.5rem 0;
             margin-top: 60px;
-            border-top: 1px solid #222;
+            border-top: 1px solid #2a1515;
         }
 
         .footer-bottom .text-muted-custom {
-            color: #888;
+            color: #b0b0b0;
         }
 
         .nav-btn-outline.footer-btn {
@@ -748,7 +798,7 @@
 
         .nav-btn-outline.footer-btn:hover {
             background: #fff;
-            color: var(--brand-dark);
+            color: var(--brand-red-deep);
         }
 
         /* === WHATSAPP WIDGET & PROMPT === */
@@ -760,6 +810,14 @@
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        @keyframes slideInWa {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+                pointer-events: auto;
+            }
         }
 
         .wa-prompt {
@@ -870,7 +928,7 @@
     <nav id="mainNav" class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
             <!-- Logo with White Pill Background -->
-            <a class="navbar-brand bg-white rounded px-2 py-1" href="#">
+            <a class="navbar-brand bg-white rounded px-2 py-1" href="index.html">
                 <img src="logo.png" alt="Consumer Links Ltd Logo" height="45">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -879,12 +937,13 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#expertise">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <!-- Note the "active" class on Home -->
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                     <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
-                        <a href="login.php" class="nav-btn-outline">Employee Portal</a>
+                        <a href="login.html" class="nav-btn-outline">Employee Portal</a>
                     </li>
                 </ul>
             </div>
@@ -892,39 +951,35 @@
     </nav>
 
     <!-- Deep Red Hero with 3D Moving Perspective Grid -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="container hero-content">
             <h1 class="hero-title" data-aos="fade-up" style="white-space: nowrap;"><br>
                 Turning Reach Into <span>RESULTS.</span><br>
             </h1>
 
             <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
-                Consumer Links Ltd delivers targeted direct marketing, robust channel management,
-                and on-ground activations that connect brands with real people and real results.
+                Consumer Links Ltd delivers targeted direct marketing, on-ground activations, and end-to-end HR
+                outsourcing solutions that connect brands with the right markets and the right people.
             </p>
 
-            <div data-aos="fade-up" data-aos-delay="200">
-                <a href="#expertise" class="btn-hero">Explore Our Solutions</a>
+            <div data-aos="fade-up" data-aos-delay="200" class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+                <a href="services.html" class="btn-hero">Explore Our Solutions</a>
+                <a href="login.php" class="btn-hero-outline">Join Talent Network</a>
             </div>
         </div>
 
         <!-- IMAGE STACK -->
         <div class="hero-images" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1200">
-            <img src="use.png"
-                alt="Consultancy">
-            <img src="use.png"
-                alt="Event Support">
-            <img src="use.png"
-                alt="Direct Marketing">
-            <img src="use.png"
-                alt="Seminars">
-            <img src="use.png"
-                alt="Strategy">
+            <img src="use.png" alt="Consultancy">
+            <img src="use.png" alt="Event Support">
+            <img src="use.png" alt="Direct Marketing">
+            <img src="use.png" alt="Seminars">
+            <img src="use.png" alt="Strategy">
         </div>
     </section>
 
     <!-- Profile & Strengths & Clients Section -->
-    <section id="profile" class="section-padding bg-white">
+    <section class="section-padding bg-white">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Left Column: Who We Are -->
@@ -932,32 +987,33 @@
                     <p class="text-brand text-uppercase fw-bold mb-2" style="letter-spacing: 2px; font-size: 0.85rem;">
                         Who We Are</p>
                     <h2 class="font-serif display-5 mb-4">Agency Profile</h2>
-                    <p class="fs-5 text-muted mb-4" style="line-height: 1.6; font-weight: 300;">
-                        Consumer Links Limited is a leading direct-marketing and consultancy communications company,
-                        delivering unique value added creative services to organizations across Nigeria.
+                    <p class="fs-5 text-muted mb-4" style="line-height: 1.6; font-weight: 400; color: #444 !important;">
+                        Consumer Links Limited is a leading hybrid direct-marketing, consultancy, and human capital
+                        outsourcing firm, delivering end-to-end value to organizations across Nigeria.
                     </p>
                 </div>
 
                 <!-- Right Column: Strengths Checklist -->
                 <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-left">
                     <div class="p-5 rounded-4 shadow-sm"
-                        style="background: var(--brand-gray-soft); border: 1px solid var(--brand-gray-mid);">
+                        style="background: var(--brand-sand); border: 1px solid var(--brand-sand-dark);">
                         <h4 class="font-serif mb-4">Our Strengths</h4>
-                        <ul class="strength-list text-muted">
+                        <ul class="strength-list">
                             <li>Well trained/motivated manpower</li>
-                            <li>On-the-job experience</li>
-                            <li>Excellent track record</li>
+                            <li>On-the-job experience & excellent track record</li>
                             <li>Creativity and innovativeness</li>
-                            <li>Well developed data-base</li>
+                            <li>Well developed data-base of active consumers</li>
+                            <li><strong>Extensive pre-verified talent database</strong></li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <!-- Trusted By / Clients Block -->
-            <div id="clients" class="row mt-5 pt-5 border-top" data-aos="fade-up">
+            <div class="row mt-5 pt-5 border-top" data-aos="fade-up"
+                style="border-color: var(--brand-sand-dark) !important;">
                 <div class="col-12 text-center mt-4">
-                    <p class="text-uppercase fw-bold mb-4" style="color: #999; letter-spacing: 2px; font-size: 0.9rem;">
+                    <p class="text-uppercase fw-bold mb-4" style="color: #666; letter-spacing: 2px; font-size: 0.9rem;">
                         Trusted By Industry Leaders</p>
                     <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
                         <span class="client-tag">Nestle Nigeria PLC</span>
@@ -977,18 +1033,26 @@
     </section>
 
     <!-- Services Section (With Light 3D Moving Grid) -->
-    <section id="expertise" class="section-padding has-3d-grid-light">
+    <section class="section-padding has-3d-grid-light" style="padding-top: 120px;">
         <div class="moving-grid"></div>
 
         <div class="container">
-            <div class="text-center mb-5 pb-4" data-aos="fade-up">
+            <div class="text-center mb-5 pb-2" data-aos="fade-up">
                 <p class="text-uppercase fw-bold mb-2 text-brand" style="letter-spacing: 2px; font-size: 0.85rem;">What
                     We Do</p>
-                <h2 class="display-4 fw-bold font-serif text-dark">Our Solutions</h2>
+                <h2 class="display-4 fw-bold font-serif text-dark">Our Hybrid Solutions</h2>
             </div>
 
-            <div class="row g-4">
+            <!-- Pillar 1: Marketing -->
+            <div class="row mb-4" data-aos="fade-up">
+                <div class="col-12 text-center">
+                    <h3 class="font-serif text-dark"
+                        style="border-bottom: 2px solid var(--brand-red); display: inline-block; padding-bottom: 10px;">
+                        Marketing & Activations</h3>
+                </div>
+            </div>
 
+            <div class="row g-4 mb-5">
                 <!-- Card 1 -->
                 <div class="col-lg-4 col-md-6" data-aos="fade-up">
                     <div class="glass-card-light">
@@ -1002,7 +1066,6 @@
                             <li>Road shows & Market storming</li>
                             <li>Dry and wet sampling activities</li>
                             <li>In-bar promotions & Club mgt</li>
-                            <li>Party services & Outsourced functions</li>
                         </ul>
                     </div>
                 </div>
@@ -1011,15 +1074,14 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="glass-card-light">
                         <div class="glass-card-light-header">
-                            <h3 class="font-serif glass-card-light-title mt-4">Direct Mail & Response</h3>
+                            <h3 class="font-serif glass-card-light-title mt-4">Direct Mail & Outreach</h3>
                         </div>
                         <ul class="glass-list-light">
-                            <li>Direct mail concept and design</li>
-                            <li>Direct mail production</li>
-                            <li>Lead generation execution</li>
-                            <li>Data Base Management</li>
-                            <li>Prompt and accurate dispatches</li>
-                            <li>Consistent follow up of leads</li>
+                            <li>Direct mail concept and production</li>
+                            <li>Lead generation & consistent follow up</li>
+                            <li>Telemarketing Services</li>
+                            <li>Customer Acquisition management</li>
+                            <li>Long-term relationship building</li>
                         </ul>
                     </div>
                 </div>
@@ -1028,31 +1090,41 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="glass-card-light">
                         <div class="glass-card-light-header">
-                            <h3 class="font-serif glass-card-light-title mt-4">Exhibitions & Seminars</h3>
-                        </div>
-                        <ul class="glass-list-light">
-                            <li>Conceptualising seminar agenda</li>
-                            <li>Creating & executing publicity plans</li>
-                            <li>Presentation formats & materials</li>
-                            <li>Management of complex logistics</li>
-                            <li>Selecting & setting up venues</li>
-                            <li>Hospitality for participants</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
-                    <div class="glass-card-light">
-                        <div class="glass-card-light-header">
-                            <h3 class="font-serif glass-card-light-title mt-4">Consumer & Market Research</h3>
+                            <h3 class="font-serif glass-card-light-title mt-4">Consumer Research & Strategy</h3>
                         </div>
                         <ul class="glass-list-light">
                             <li>Conduct deep market research</li>
-                            <li>Develop custom research formats</li>
                             <li>Data collection and collation</li>
-                            <li>Data-driven product advisory</li>
                             <li>Actionable consumer insights</li>
+                            <li>Developing Marketing Strategies</li>
+                            <li>Brand Performance Monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pillar 2: HR & Outsourcing -->
+            <div class="row mb-4 mt-5" data-aos="fade-up">
+                <div class="col-12 text-center">
+                    <h3 class="font-serif text-dark"
+                        style="border-bottom: 2px solid var(--brand-red); display: inline-block; padding-bottom: 10px;">
+                        HR & Outsourcing Solutions</h3>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Card 4 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="glass-card-light">
+                        <div class="glass-card-light-header">
+                            <h3 class="font-serif glass-card-light-title mt-4">Staff Outsourcing & Management</h3>
+                        </div>
+                        <ul class="glass-list-light">
+                            <li>Provision of contract & temporary staff</li>
+                            <li>Deployment of field sales agents</li>
+                            <li>Artisan and technical manpower</li>
+                            <li>Performance & attendance tracking</li>
+                            <li>Seamless replacement protocols</li>
                         </ul>
                     </div>
                 </div>
@@ -1061,14 +1133,14 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="glass-card-light">
                         <div class="glass-card-light-header">
-                            <h3 class="font-serif glass-card-light-title mt-4">Marketing Consultancy</h3>
+                            <h3 class="font-serif glass-card-light-title mt-4">Talent Acquisition & Recruiting</h3>
                         </div>
                         <ul class="glass-list-light">
-                            <li>Developing Marketing Strategies</li>
-                            <li>Implementation of Marketing Efforts</li>
-                            <li>Brand Performance Monitoring</li>
-                            <li>Regular Assessment of Brand Assets</li>
-                            <li>Corporate positioning strategy</li>
+                            <li>Executive headhunting & placement</li>
+                            <li>Mass recruitment for large projects</li>
+                            <li>Rigorous skills assessment & vetting</li>
+                            <li>Background checks & verification</li>
+                            <li>Tailored industry recruitment drives</li>
                         </ul>
                     </div>
                 </div>
@@ -1077,14 +1149,14 @@
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="glass-card-light">
                         <div class="glass-card-light-header">
-                            <h3 class="font-serif glass-card-light-title mt-4">Acquisition & Outreach</h3>
+                            <h3 class="font-serif glass-card-light-title mt-4">HR Advisory & Payroll Admin</h3>
                         </div>
                         <ul class="glass-list-light">
-                            <li>Telemarketing Services</li>
-                            <li>Targeted E-mail Marketing</li>
-                            <li>Customer Acquisition management</li>
-                            <li>Customer Retention management</li>
-                            <li>Long-term relationship building</li>
+                            <li>End-to-end multi-tier payroll management</li>
+                            <li>Benefits & tax compliance tracking</li>
+                            <li>Employee relations & dispute resolution</li>
+                            <li>Compensation restructuring</li>
+                            <li>Custom HR policy development</li>
                         </ul>
                     </div>
                 </div>
@@ -1093,16 +1165,16 @@
         </div>
     </section>
 
-    <!-- Horizontal Flow Process Section -->
-    <section id="process" class="process-section-light bg-white" style="padding-top: 80px;">
+    <!-- Process Section with updated bottom padding -->
+    <section class="process-section-light bg-white" style="padding-top: 80px; padding-bottom: 120px;">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                 <p class="text-uppercase fw-bold mb-2 text-brand" style="letter-spacing: 2px; font-size: 0.85rem;">The
                     Framework</p>
                 <h2 class="font-serif display-4 fw-bold mb-4">Our Process</h2>
                 <p class="text-muted mx-auto" style="font-weight: 300; font-size: 1.1rem; max-width: 600px;">
-                    A highly structured approach to ensure your campaign is flawlessly executed from inception to final
-                    delivery.
+                    A highly structured approach to ensure your campaign or deployment is flawlessly executed from
+                    inception to final delivery.
                 </p>
             </div>
 
@@ -1128,7 +1200,7 @@
                     <div class="node-circle">03</div>
                     <div class="node-content">
                         <h4 class="font-serif fw-bold">Agency Brief</h4>
-                        <p>Translating discovery data into actionable intelligence and campaign structure.</p>
+                        <p>Translating discovery data into actionable intelligence and operational structure.</p>
                     </div>
                 </div>
 
@@ -1153,14 +1225,16 @@
     </section>
 
     <!-- Benefits Section -->
-    <section class="section-padding bg-soft border-bottom border-top" style="border-color: #eaeaea !important;">
+    <section class="section-padding bg-sand border-bottom border-top"
+        style="border-color: var(--brand-sand-dark) !important;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <p class="text-uppercase fw-bold mb-2 text-brand" style="letter-spacing: 2px; font-size: 0.85rem;">
                         The Promise</p>
                     <h2 class="font-serif display-5 fw-bold mb-4">Key Benefits of Our Offer</h2>
-                    <p class="text-muted mb-4 fs-5" style="font-weight: 300;">We ensure that the proper and intended
+                    <p class="text-muted mb-4 fs-5" style="font-weight: 300; color: #444 !important;">We ensure that the
+                        proper and intended
                         message is delivered effectively.</p>
                     <ul class="list-unstyled benefit-list">
                         <li>Develop & maintain sustainable/profitable relationships with target customers.</li>
@@ -1171,15 +1245,15 @@
                     </ul>
                 </div>
                 <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-left">
-                    <img src="use.png"
-                        alt="Team Meeting" class="img-fluid rounded-4 shadow-sm border" style="border-color: #eaeaea;">
+                    <img src="use.png" alt="Team Meeting" class="img-fluid rounded-4 shadow-sm border"
+                        style="border-color: var(--brand-sand-dark);">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Activations / Gallery -->
-    <section id="gallery" class="section-padding bg-white">
+    <section class="section-padding bg-white">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                 <h2 class="font-serif display-5 fw-bold">Activations & Gallery</h2>
@@ -1188,28 +1262,23 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item" data-aos="fade-up">
-                    <img src="use.png"
-                        alt="Market Activation">
+                    <img src="use.png" alt="Market Activation">
                     <div class="gallery-caption">Mimee Noodles Market Activation</div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                    <img src="use.png"
-                        alt="Road Show">
+                    <img src="use.png" alt="Road Show">
                     <div class="gallery-caption">Nationwide Road Shows</div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                    <img src="use.png"
-                        alt="Conferences">
+                    <img src="use.png" alt="Conferences">
                     <div class="gallery-caption">Seminar & Conference Logistics</div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                    <img src="use.png"
-                        alt="Market Storming">
+                    <img src="use.png" alt="Market Storming">
                     <div class="gallery-caption">Market Storming & Wet Sampling</div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                    <img src="use.png"
-                        alt="In bar promotion">
+                    <img src="use.png" alt="In bar promotion">
                     <div class="gallery-caption">In-Bar Promotions & Party Services</div>
                 </div>
                 <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
@@ -1220,31 +1289,32 @@
         </div>
     </section>
 
-    <!-- MEGA CTA WITH DARK 3D MOVING GRID -->
-    <section class="section-padding has-3d-grid-dark text-center" style="padding: 150px 0;">
+    <!-- MEGA CTA WITH RED 3D MOVING GRID -->
+    <section class="section-padding has-3d-grid-red text-center" style="padding: 150px 0;">
         <div class="moving-grid"></div>
 
         <div class="container" data-aos="fade-up">
-            <h2 class="font-serif display-4 fw-bold text-white mb-4">Let's Grow Your Brand</h2>
+            <h2 class="font-serif display-4 fw-bold text-white mb-4">Ready to Grow Your Brand?</h2>
             <p class="fs-5 text-white opacity-75 mb-5 mx-auto" style="max-width: 600px; font-weight: 300;">
-                Partner with us to build sustainable structures, execute flawless campaigns, and drive real measurable
-                results.
+                Partner with us to build sustainable structures, execute flawless campaigns, or source the premium
+                talent your business needs.
             </p>
-            <a href="mailto:info@consumerlinksltd.com" class="btn-cta fs-5">Contact Us Today</a>
+            <a href="contact.html" class="btn-cta fs-5">Contact Us Today</a>
         </div>
     </section>
 
-    <!-- Dark Theme Footer -->
+    <!-- Warm Dark Theme Footer -->
     <footer class="footer-standard">
         <div class="container">
             <div class="row g-5 footer-col">
                 <div class="col-lg-4 pe-lg-4">
                     <!-- Inserted Logo Placeholder with White Background -->
-                    <a class="navbar-brand mb-4 d-inline-block bg-white rounded px-2 py-1" href="#">
+                    <a class="navbar-brand mb-4 d-inline-block bg-white rounded px-2 py-1" href="index.html">
                         <img src="logo.png" alt="Consumer Links Ltd Logo" height="45">
                     </a>
                     <p>
-                        Building sustainable structures and delivering original, robust marketing solutions since 2012.
+                        Building sustainable structures and delivering original, robust marketing and HR solutions since
+                        2012.
                     </p>
                 </div>
 
@@ -1262,11 +1332,11 @@
                 <div class="col-lg-2">
                     <h5>Solutions</h5>
                     <ul>
-                        <li><a href="#expertise">Events & Roadshows</a></li>
-                        <li><a href="#expertise">Direct Mail</a></li>
-                        <li><a href="#expertise">Market Research</a></li>
-                        <li><a href="#expertise">Marketing Consultancy</a></li>
-                        <li><a href="#expertise">Acquisition & Outreach</a></li>
+                        <li><a href="services.html">Marketing & Activations</a></li>
+                        <li><a href="services.html">Staff Outsourcing</a></li>
+                        <li><a href="services.html">Market Research</a></li>
+                        <li><a href="services.html">Talent Acquisition</a></li>
+                        <li><a href="services.html">Payroll Administration</a></li>
                     </ul>
                 </div>
 
@@ -1304,7 +1374,7 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Widget & Delayed Prompt -->
+    <!-- Floating WhatsApp Widget -->
     <div class="wa-wrapper">
         <div class="wa-prompt" id="wa-prompt">
             Have any questions? Let's chat!

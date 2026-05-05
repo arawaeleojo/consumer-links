@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Admin Dashboard | Consumer Links Ltd</title>
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === CORE STYLES === */
+        :root {
+            --brand-red: #d30000;
+            --brand-red-deep: #8b0000;
+            --brand-dark: #120a0a;
+            --brand-light: #ffffff;
+            --brand-sand: #FFFDD0;
+            --brand-sand-dark: #e6e4b8;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--brand-sand);
+            color: var(--brand-dark);
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .text-brand {
+            color: var(--brand-red) !important;
+        }
+
+        /* Replaces bootstrap's gray text-muted with an opacity-based dark tone */
+        .text-dim {
+            color: var(--brand-dark);
+            opacity: 0.65;
+        }
+
+        /* === SIDEBAR NAVIGATION === */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background-color: var(--brand-light);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--brand-sand-dark);
+            text-align: center;
+        }
+
+        .sidebar-nav {
+            padding: 1.5rem 0;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item-admin {
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--brand-dark);
+            opacity: 0.8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item-admin:hover {
+            background-color: var(--brand-sand);
+            color: var(--brand-red);
+            opacity: 1;
+        }
+
+        .nav-item-admin.active {
+            background-color: var(--brand-sand);
+            color: var(--brand-red-deep);
+            border-left-color: var(--brand-red);
+            font-weight: 600;
+            opacity: 1;
+        }
+
+        .nav-item-admin i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--brand-sand-dark);
+        }
+
+        /* === MAIN CONTENT AREA === */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Header / Topbar */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background-color: var(--brand-light);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--brand-light);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--brand-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Dashboard Metric Cards */
+        .stat-card {
+            background-color: var(--brand-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--brand-light);
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-sand-dark);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background-color: var(--brand-sand);
+            color: var(--brand-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-details h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--brand-dark);
+        }
+
+        .stat-details p {
+            margin: 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Actions & Table Area */
+        .table-container {
+            background-color: var(--brand-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            margin-top: 2rem;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* Export/Action Buttons */
+        .btn-action {
+            background-color: var(--brand-light);
+            color: var(--brand-dark);
+            border: 1px solid var(--brand-sand-dark);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action:hover {
+            border-color: var(--brand-red);
+            color: var(--brand-red);
+            background-color: var(--brand-sand);
+        }
+
+        .btn-primary-action {
+            background-color: var(--brand-red);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary-action:hover {
+            background-color: var(--brand-red-deep);
+            color: white;
+        }
+
+        /* Custom Table Styling */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .custom-table th {
+            background-color: var(--brand-sand);
+            color: var(--brand-dark);
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--brand-sand-dark);
+        }
+
+        .custom-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--brand-sand-dark);
+            vertical-align: middle;
+            font-size: 0.95rem;
+            color: var(--brand-dark);
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: var(--brand-sand);
+        }
+
+        /* Approval Badges */
+        .badge-status {
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-approved {
+            background-color: var(--brand-light);
+            color: #1e7e34;
+            border: 1px solid #1e7e34;
+        }
+
+        .status-pending {
+            background-color: var(--brand-sand);
+            color: var(--brand-red-deep);
+            border: 1px solid var(--brand-sand-dark);
+        }
+
+        .status-rejected {
+            background-color: var(--brand-light);
+            color: var(--brand-red);
+            border: 1px solid var(--brand-red);
+        }
+
+        /* Form Inputs */
+        .search-input,
+        .filter-select {
+            border: 1px solid var(--brand-sand-dark);
+            background-color: var(--brand-light);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            color: var(--brand-dark);
+            font-weight: 500;
+        }
+
+        .search-input {
+            width: 220px;
+        }
+
+        .filter-select {
+            width: 180px;
+            cursor: pointer;
+        }
+
+        .search-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--brand-red);
+            box-shadow: 0 0 0 2px rgba(211, 0, 0, 0.1);
+        }
+
+        /* Micro Action Buttons in Table */
+        .btn-micro {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--brand-sand-dark);
+            background: var(--brand-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            cursor: pointer;
+            color: var(--brand-dark);
+        }
+
+        .btn-micro:hover {
+            background: var(--brand-sand);
+            border-color: var(--brand-dark);
+        }
+
+        .btn-approve:hover {
+            background: #e6f4ea;
+            border-color: #1e7e34;
+            color: #1e7e34;
+        }
+
+        .btn-reject:hover {
+            background: #fee8e8;
+            border-color: var(--brand-red);
+            color: var(--brand-red);
+        }
+
+        /* Mobile Sidebar Adjustments */
+        @media (max-width: 991px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input,
+            .filter-select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <a href="index.html">
+                <img src="../logo.png" alt="Consumer Links" height="40">
+            </a>
+        </div>
+        <div class="sidebar-nav">
+            <a href="admin-dashboard.html" class="nav-item-admin active">
+                <i class="fa-solid fa-table-columns"></i> Dashboard
+            </a>
+            <a href="talent-directory.html" class="nav-item-admin">
+                <i class="fa-solid fa-users"></i> Talent Directory
+            </a>
+            <a href="bulk-email.html" class="nav-item-admin">
+                <i class="fa-solid fa-envelope-open-text"></i> Bulk Email
+            </a>
+            <a href="admin-settings.html" class="nav-item-admin">
+                <i class="fa-solid fa-gear"></i> Settings
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="login.html" class="nav-item-admin text-brand" style="padding: 0; opacity: 1;">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Secure Logout
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div>
+                <h4 class="font-serif fw-bold mb-0">Talent Directory</h4>
+                <p class="text-dim mb-0" style="font-size: 0.85rem; font-weight: 500;">Review registrations and dispatch
+                    communications.</p>
+            </div>
+            <div class="user-profile">
+                <div class="text-end d-none d-sm-block">
+                    <p class="mb-0 fw-bold" style="font-size: 0.9rem;">HR Admin</p>
+                    <p class="mb-0 text-dim" style="font-size: 0.8rem;">admin@consumerlinksltd.com</p>
+                </div>
+                <div class="avatar">HR</div>
+            </div>
+        </header>
+
+        <!-- Metric Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>1,248</h3>
+                        <p class="text-dim">Total Registered</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-icon"
+                        style="background-color: var(--brand-light); border: 2px solid var(--brand-red);">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>42</h3>
+                        <p class="text-dim">Pending Approval</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: var(--brand-red); color: white;">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>1,180</h3>
+                        <p class="text-dim">Approved Talent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Talent Roster Table -->
+        <div class="table-container">
+            <div class="table-header">
+                <h4 class="font-serif fw-bold mb-0">Registrations</h4>
+                <div class="d-flex gap-2 flex-wrap">
+                    <input type="text" class="search-input" placeholder="Search name or ID...">
+
+                    <select class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="merchandiser">Merchandisers</option>
+                        <option value="retailer">Retailers</option>
+                        <option value="field-sales">Field Sales Agents</option>
+                        <option value="admin">Administrative</option>
+                    </select>
+
+                    <button class="btn-primary-action"><i class="fa-solid fa-paper-plane"></i> Send Bulk Email</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Talent Details</th>
+                            <th>Category</th>
+                            <th>Date Reg.</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold">CLL-1042</td>
+                            <td>
+                                <div class="fw-bold">Eleojo Arawa</div>
+                                <div class="text-dim" style="font-size: 0.8rem;">eleojo@example.com</div>
+                            </td>
+                            <td>Retailer</td>
+                            <td>Oct 12, 2025</td>
+                            <td><span class="badge-status status-approved"><i class="fa-solid fa-check-circle"></i>
+                                    Approved</span></td>
+                            <td>
+                                <button class="btn-micro" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-micro btn-reject" title="Revoke Approval"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">CLL-1043</td>
+                            <td>
+                                <div class="fw-bold">Sarah Johnson</div>
+                                <div class="text-dim" style="font-size: 0.8rem;">sarah.j@example.com</div>
+                            </td>
+                            <td>Merchandiser</td>
+                            <td>Oct 14, 2025</td>
+                            <td><span class="badge-status status-pending"><i class="fa-solid fa-clock"></i>
+                                    Pending</span></td>
+                            <td>
+                                <button class="btn-micro" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-micro btn-approve" title="Approve"><i
+                                        class="fa-solid fa-check"></i></button>
+                                <button class="btn-micro btn-reject" title="Reject"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">CLL-1044</td>
+                            <td>
+                                <div class="fw-bold">Michael Okeke</div>
+                                <div class="text-dim" style="font-size: 0.8rem;">m.okeke@example.com</div>
+                            </td>
+                            <td>Retailer</td>
+                            <td>Oct 14, 2025</td>
+                            <td><span class="badge-status status-rejected"><i class="fa-solid fa-ban"></i>
+                                    Rejected</span></td>
+                            <td>
+                                <button class="btn-micro" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-micro btn-approve" title="Approve"><i
+                                        class="fa-solid fa-check"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">CLL-1045</td>
+                            <td>
+                                <div class="fw-bold">Grace Adeyemi</div>
+                                <div class="text-dim" style="font-size: 0.8rem;">grace.a@example.com</div>
+                            </td>
+                            <td>Administrative</td>
+                            <td>Oct 15, 2025</td>
+                            <td><span class="badge-status status-approved"><i class="fa-solid fa-check-circle"></i>
+                                    Approved</span></td>
+                            <td>
+                                <button class="btn-micro" title="View Details"><i class="fa-solid fa-eye"></i></button>
+                                <button class="btn-micro btn-reject" title="Revoke Approval"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <span class="text-dim" style="font-size: 0.85rem; font-weight: 500;">Showing 1 to 4 of 1,248
+                    entries</span>
+                <div class="btn-group">
+                    <button class="btn-action" style="padding: 4px 10px;">Prev</button>
+                    <button class="btn-primary-action" style="padding: 4px 12px; border-radius: 0;">1</button>
+                    <button class="btn-action" style="padding: 4px 12px; border-radius: 0;">2</button>
+                    <button class="btn-action" style="padding: 4px 12px; border-radius: 0;">3</button>
+                    <button class="btn-action" style="padding: 4px 10px;">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
